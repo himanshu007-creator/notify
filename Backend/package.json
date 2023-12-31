@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon index.js "
   },
-  "author": "",
+  "author":[
+    {"name":"Himanshu","url": "https://github.com/himanshu007-creator"},
+    {"name":"Hridhima","url":"https://github.com/Hridhima"}
+    ],
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
