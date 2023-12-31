@@ -1,0 +1,23 @@
+{
+  "name": "inotes-backend",
+  "version": "1.0.0",
+  "description": "Your Notes on the Cloud",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon index.js "
+  },
+  "author":[
+    {"name":"Himanshu","url": "https://github.com/himanshu007-creator"},
+    {"name":"Hridhima","url":"https://github.com/Hridhima"}
+    ],
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.4.4",
+    "nodemon": "^3.0.1"
+  }
+}
