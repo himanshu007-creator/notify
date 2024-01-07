@@ -2,7 +2,7 @@ var jwt = require('jsonwebtoken');
 const JWT_SECRET = "Hridhima$react"
 
 
-    const fetchuser = (req, res, next) => {
+const fetchuser = (req, res, next) => {
     //Get user from the token and add id to req object
 
     const token = req.header('auth-token');
@@ -15,7 +15,7 @@ const JWT_SECRET = "Hridhima$react"
         next();
 
     } catch (error) {
-    res.status(401).send({ error: "Please Authenticate with valid token" })
+        res.status(401).send({ error: "Please Authenticate with valid token" })
 
     }
 }

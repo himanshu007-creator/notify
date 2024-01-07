@@ -8,11 +8,15 @@
         "serve": "nodemon index.js "
     },
     "author": [
-        { "name": "Hridhima", "url": "https://github.com/Hridhima" }
+        {
+            "name": "Hridhima",
+            "url": "https://github.com/Hridhima"
+        }
     ],
     "license": "ISC",
     "dependencies": {
         "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
         "express": "^4.18.2",
         "express-validator": "^7.0.1",
         "jsonwebtoken": "^9.0.2",
