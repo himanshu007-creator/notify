@@ -1,15 +1,20 @@
 "use client";
 
+import { login, signup } from "@/app/apiCalls/login";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import appLogo from "../../public/images/logo.png";
 import { AuthPageType } from "./types";
+
 
 export const LoginSignup: React.FC = () => {
     const [selectedPageType, setSelectedPageType] = useState<AuthPageType>('login')
     const [userName, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [email, setEmail] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
+    const router = useRouter();
 
     const handleAuthTypeChange = () => {
         if (selectedPageType === 'login') {
@@ -17,6 +22,22 @@ export const LoginSignup: React.FC = () => {
         } else {
             setSelectedPageType('login')
         }
+    }
+
+    const handleLoginOrSignup = async () => {
+        setLoading(true)
+        if (selectedPageType === 'login') {
+            const loginSuccess = await login(email, password)
+            if(loginSuccess) {
+                router.push( "/");
+            }
+        } else {
+            const signupSuccess = await signup(userName, email, password)
+            if(signupSuccess) {
+                router.push( "/");
+            }
+        }
+        setLoading(false)
     }
 
     return (
@@ -36,7 +57,7 @@ export const LoginSignup: React.FC = () => {
                 <div className="mt-2 text-black">
 
                     {
-                        selectedPageType === 'login' &&
+                        selectedPageType === 'signup' &&
                         <input
                             type="text"
                             className="w-full h-10 rounded-md border-2 border-gray-400 p-2"
@@ -45,6 +66,13 @@ export const LoginSignup: React.FC = () => {
                             onChange={(e) => { setUsername(e.target.value) }}
                         />
                     }
+                    <input
+                        type="email"
+                        className="w-full h-10 rounded-md border-2 border-gray-400 p-2 mt-4"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => { setEmail(e.target.value) }}
+                    />
 
                     <input
                         type="password"
@@ -53,15 +81,11 @@ export const LoginSignup: React.FC = () => {
                         value={password}
                         onChange={(e) => { setPassword(e.target.value) }}
                     />
-                    <input
-                        type="email"
-                        className="w-full h-10 rounded-md border-2 border-gray-400 p-2 mt-4"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => { setEmail(e.target.value) }}
-                    />
                     <p>
-                        <button className="w-full h-10 rounded-md border-2 border-gray-400 p-2 mt-4 bg-red-600 text-white">Sign Up</button>
+                        <button onClick={handleLoginOrSignup} className="w-full h-10 rounded-md border-2 border-gray-400 p-2 mt-4 bg-red-600 text-white">
+                            {loading && <span className="animate-spin mr-2">🔄</span>}
+                            {!loading && selectedPageType === 'login' ? 'Login' : 'Sign Up'}
+                        </button>
                     </p>
                     <p className="text-center mt-4 text-blue-400" onClick={handleAuthTypeChange}>
                         {
